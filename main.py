@@ -18,7 +18,7 @@ def main(input_doc_path):
 
     client = instructor.from_openai(OpenAI())
 
-    response = parse_lead_from_message(client, CreditCardStatement, context_markdown)
+    response = parse_lead_from_message(CreditCardStatement, context_markdown, model_name="openai")
 
     spend_line_items = response.model_dump()['spend_line_items']
 
@@ -34,6 +34,6 @@ def main(input_doc_path):
 
 
 if __name__ == "__main__":
-    input_doc_path = "Amex.pdf"
+    input_doc_path = "sample_invoice_uk.pdf"
     main(input_doc_path)
     #print(text)
