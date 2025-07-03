@@ -4,6 +4,7 @@ from openai import OpenAI
 from pydantic import BaseModel, Field
 from pydantic_extra_types.phone_numbers import PhoneNumber
 from typing import Iterable
+import argparse
 
 from fields_to_extract import CreditCardStatement
 from client_request import parse_lead_from_message
@@ -25,7 +26,7 @@ def main(input_doc_path):
     spend_line_items = response.model_dump()['spend_line_items']
 
     # Step 2: Choose a filename
-    filename = 'spend_line_items_v2_category_amex.csv'
+    filename = 'transactions.csv'
     with open(filename, mode='w', newline='') as file:
         if spend_line_items:
             writer = csv.DictWriter(file, fieldnames=spend_line_items[0].keys())
@@ -36,6 +37,7 @@ def main(input_doc_path):
 
 
 if __name__ == "__main__":
-    input_doc_path = "example_bill.pdf"
-    main(input_doc_path)
-    #print(text)
+    parser = argparse.ArgumentParser(description="Extract structured information from PDF documents.")
+    parser.add_argument("input_doc_path", help="Path to the input PDF file.")
+    args = parser.parse_args()
+    main(args.input_doc_path)
