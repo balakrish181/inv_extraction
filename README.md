@@ -34,7 +34,7 @@ This project extracts structured information from PDF documents like invoices an
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository_url>
+    clone this repository
     cd invoice_extraction
     ```
 
