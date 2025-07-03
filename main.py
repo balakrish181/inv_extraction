@@ -8,15 +8,17 @@ from typing import Iterable
 from fields_to_extract import CreditCardStatement
 from client_request import parse_lead_from_message
 import csv
+import sys 
 
 def main(input_doc_path):
 
     
     context_markdown = extract_text_from_pdf(input_doc_path)
 
+    print(context_markdown)
+    sys.exit()
 
-
-    client = instructor.from_openai(OpenAI())
+    #client = instructor.from_openai(OpenAI())
 
     response = parse_lead_from_message(CreditCardStatement, context_markdown, model_name="openai")
 
@@ -34,6 +36,6 @@ def main(input_doc_path):
 
 
 if __name__ == "__main__":
-    input_doc_path = "sample_invoice_uk.pdf"
+    input_doc_path = "example_bill.pdf"
     main(input_doc_path)
     #print(text)
